@@ -27,7 +27,7 @@ namespace wpfHeartbit
 			return SetItem(factory(), id); 
 		}
 		
-		public RawData SetItem(IRawData value, uint id)
+		public IRawData SetItem(IRawData value, uint id)
 		{
    
 			value.Id = id;
