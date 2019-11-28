@@ -24,9 +24,10 @@ namespace wpfHeartbit
 			var dep = new DependencyObject();
 			if (!DesignerProperties.GetIsInDesignMode(dep))
 			{
+				var rows = hrt.Get(0, 100);
 				var action = false
 					? new Action(() => RunRows(cncl.Token, hrt))
-					: new Action(() => RunRowUpdate(cncl.Token, hrt));
+					: new Action(() => RunRowUpdate(cncl.Token, hrt, rows));
 				RunTask = Task.Run(action);
 			}
 		}
@@ -46,9 +47,9 @@ namespace wpfHeartbit
 			}
 		}
 
-		void RunRowUpdate(CancellationToken token, Heartbit hrt)
+		void RunRowUpdate(CancellationToken token, Heartbit hrt, ObservableCollection<IRawData> rows)
 		{
-			Rows = hrt.Get(Current, 100);
+			Rows = rows;
 			while (!token.IsCancellationRequested)
 			{
 				Current++;
