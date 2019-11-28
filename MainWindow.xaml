@@ -10,92 +10,50 @@
 		<local:MainWindowViewModel/>
 	</Window.DataContext>
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="1*"/>
+		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition />
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<DataGrid Grid.Row="0" ItemsSource="{Binding Rows, IsAsync=True}" AutoGenerateColumns="False">
+		<DataGrid Grid.Row="0" Grid.Column ="0" ItemsSource="{Binding Rows, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True">
 			<DataGrid.Columns>
-				<DataGridTemplateColumn Header="id"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Id}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Title"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Title}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Amount"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Amount}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Average"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Average}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Created"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Created}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Note"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Note}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Min"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Min}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Max"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Max}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Exp"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Exp}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Info"  >
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Info}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
+				<DataGridTextColumn  Header="id"  Binding="{Binding Id}" />
+				<DataGridTextColumn Header="Title" Binding="{Binding Title}"  />
+				<DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
+				<DataGridTextColumn Header="Average" Binding="{Binding Average}" />
+				<DataGridTextColumn Header="Created" Binding="{Binding Created}" />
+				<DataGridTextColumn Header="Note" Binding="{Binding Note}" />
+				<DataGridTextColumn Header="Min" Binding="{Binding Min}" />
+				<DataGridTextColumn Header="Max" Binding="{Binding Max}" />
+				<DataGridTextColumn Header="Exp" Binding="{Binding Exp}" />
+				<DataGridTextColumn Header="Info" Binding="{Binding Info}" />
 			</DataGrid.Columns>
 		</DataGrid>
-		<StackPanel Grid.Row="1" Orientation="Horizontal">
+		<DataGrid Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Rows, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Info" Binding="{Binding Info}" />
+				<DataGridTextColumn Header="Exp" Binding="{Binding Exp}" />
+				<DataGridTextColumn Header="Max" Binding="{Binding Max}" />
+				<DataGridTextColumn Header="Min" Binding="{Binding Min}" />
+				<DataGridTextColumn Header="Note" Binding="{Binding Note}" />
+				<DataGridTextColumn Header="Created" Binding="{Binding Created}" />
+				<DataGridTextColumn Header="Average" Binding="{Binding Average}" />
+				<DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
+				<DataGridTextColumn Header="Title" Binding="{Binding Title}"  />
+				<DataGridTextColumn  Header="id"  Binding="{Binding Id}" />
+			</DataGrid.Columns>
+		</DataGrid>
+		<StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
 			<TextBlock Text="current:"/>
 			<TextBlock Text="{Binding Current}"/>
-			<RadioButton GroupName="Freq" Content="250" IsChecked="{Binding Path=Freq250, Mode=TwoWay}" Margin="15,0,0,0"/>
-			<RadioButton GroupName="Freq" Content="500" IsChecked="{Binding Path=Freq500, Mode=TwoWay}" Margin="15,0,0,0"/>
-			<RadioButton GroupName="Freq" Content="750" IsChecked="{Binding Path=Freq750, Mode=TwoWay}" Margin="15,0,0,0"/>
-			<RadioButton GroupName="Freq" Content="1000" IsChecked="{Binding Path=Freq1000, Mode=TwoWay}" Margin="15,0,0,0"/>
+			<TextBlock Text="frequency:" Margin="25,0,0,0"/>
+			<RadioButton GroupName="Freq" Content="1/250" IsChecked="{Binding Path=Freq250, Mode=TwoWay}" Margin="5,0,0,0"/>
+			<RadioButton GroupName="Freq" Content="1/500" IsChecked="{Binding Path=Freq500, Mode=TwoWay}" Margin="15,0,0,0"/>
+			<RadioButton GroupName="Freq" Content="1/750" IsChecked="{Binding Path=Freq750, Mode=TwoWay}" Margin="15,0,0,0"/>
+			<RadioButton GroupName="Freq" Content="1/1000" IsChecked="{Binding Path=Freq1000, Mode=TwoWay}" Margin="15,0,0,0"/>
 		</StackPanel>
     </Grid>
 </Window>

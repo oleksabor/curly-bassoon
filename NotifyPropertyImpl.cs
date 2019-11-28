@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,6 +10,8 @@ namespace wpfHeartbit
 	public class NotifyPropertyImpl 
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		ConcurrentDictionary<string, PropertyChangedEventArgs> _args = new ConcurrentDictionary<string, PropertyChangedEventArgs>();
 
 		protected void Set<T>(ref T oldValue, T newValue, [CallerMemberName] string name = null)
 		{
@@ -22,7 +25,18 @@ namespace wpfHeartbit
 		protected void Notify([CallerMemberName] string name = null)
 		{
 			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(name));
+				PropertyChanged(this, GetArgs(name));
+		}
+
+		protected PropertyChangedEventArgs GetArgs(string name)
+		{
+			_args.TryGetValue(name, out PropertyChangedEventArgs res);
+			if (res == null)
+			{
+				res = new PropertyChangedEventArgs(name);
+				_args.TryAdd(name, res);
+			}
+			return res;
 		}
 	}
 }

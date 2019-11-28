@@ -24,7 +24,7 @@ namespace wpfHeartbit
 			var dep = new DependencyObject();
 			if (!DesignerProperties.GetIsInDesignMode(dep))
 			{
-				var rows = hrt.Get(0, 100);
+				var rows = hrt.Get(0, 50);
 				var action = false
 					? new Action(() => RunRows(cncl.Token, hrt))
 					: new Action(() => RunRowUpdate(cncl.Token, hrt, rows));
