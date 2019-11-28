@@ -11,7 +11,7 @@ namespace wpfHeartbit
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		ConcurrentDictionary<string, PropertyChangedEventArgs> _args = new ConcurrentDictionary<string, PropertyChangedEventArgs>();
+		static ConcurrentDictionary<string, PropertyChangedEventArgs> _args = new ConcurrentDictionary<string, PropertyChangedEventArgs>();
 
 		protected void Set<T>(ref T oldValue, T newValue, [CallerMemberName] string name = null)
 		{
@@ -28,7 +28,7 @@ namespace wpfHeartbit
 				PropertyChanged(this, GetArgs(name));
 		}
 
-		protected PropertyChangedEventArgs GetArgs(string name)
+		protected static PropertyChangedEventArgs GetArgs(string name)
 		{
 			_args.TryGetValue(name, out PropertyChangedEventArgs res);
 			if (res == null)
