@@ -43,7 +43,8 @@ namespace wpfHeartbit
 				if (Current == uint.MaxValue)
 					Current = 0;
 
-				Thread.Sleep(1000);
+				if (!token.IsCancellationRequested)
+					Thread.Sleep(Freq);
 			}
 		}
 
